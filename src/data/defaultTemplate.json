@@ -1,0 +1,1221 @@
+{
+  "entities": {
+    "account_plan": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null",
+      "slug": "text not-null",
+      "description": "text",
+      "stripeId": "text",
+      "updated_at": "timestamp"
+    },
+    "account_plan_capabilities": {
+      "id": "uuid not-null primary-key",
+      "capabilityId": "uuid not-null",
+      "accountPlanId": "uuid not-null",
+      "isLimited": "boolean"
+    },
+    "account_plan_options": {
+      "id": "uuid not-null primary-key",
+      "value": "text not-null",
+      "accountPlanId": "uuid not-null",
+      "optionId": "uuid not-null"
+    },
+    "activity_location": {
+      "value": "text not-null primary-key",
+      "name": "text not-null",
+      "descriptionTemplate": "text not-null",
+      "iconName": "text not-null"
+    },
+    "activity_log": {
+      "id": "uuid not-null primary-key",
+      "locationSlug": "text not-null",
+      "userMetaID": "uuid not-null",
+      "payload": "text",
+      "description": "text",
+      "created_at": "timestamp",
+      "documentID": "uuid",
+      "activity": "text",
+      "orgId": "uuid not-null"
+    },
+    "admin_tips": {
+      "id": "uuid not-null primary-key",
+      "title": "text not-null",
+      "description": "text not-null",
+      "cta_url": "text not-null",
+      "cta_title": "text not-null",
+      "created_at": "timestamp",
+      "updated_at": "timestamp"
+    },
+    "admin_tips_permission_roles": {
+      "id": "uuid not-null primary-key",
+      "admin_tip_id": "uuid not-null",
+      "user_role_id": "uuid not-null"
+    },
+    "api_user_token": {
+      "id": "uuid not-null primary-key",
+      "user": "text not-null",
+      "token": "text not-null"
+    },
+    "billing_frequency": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "case_study": {
+      "id": "uuid not-null primary-key",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "name": "text",
+      "link": "text",
+      "googleSlideLink": "text",
+      "otherLink": "text",
+      "createdByUserCognitoSub": "text",
+      "thumbnailKey": "text",
+      "summary": "text",
+      "about": "text",
+      "isAnonymous": "boolean not-null",
+      "isPrivate": "boolean not-null",
+      "orgId": "uuid not-null",
+      "discoverability": "text not-null",
+      "last_updated_at": "timestamp not-null",
+      "authorId": "uuid",
+      "hideAssociatedCompanies": "boolean not-null",
+      "order": "integer"
+    },
+    "case_study_company": {
+      "id": "uuid not-null primary-key",
+      "companyID": "uuid not-null",
+      "caseStudyID": "uuid not-null"
+    },
+    "case_study_gallery": {
+      "id": "uuid not-null",
+      "case_study_id": "uuid not-null",
+      "image_key": "text not-null",
+      "thumbnail_key": "text"
+    },
+    "case_study_industry": {
+      "id": "uuid not-null primary-key",
+      "industryID": "uuid not-null",
+      "caseStudyID": "uuid not-null"
+    },
+    "case_study_language": {
+      "id": "uuid not-null primary-key",
+      "languageCode": "text not-null",
+      "caseStudyID": "uuid not-null"
+    },
+    "case_study_links": {
+      "id": "uuid not-null primary-key",
+      "case_study_id": "uuid not-null",
+      "link": "text not-null",
+      "link_icon": "text"
+    },
+    "case_study_market": {
+      "id": "uuid not-null primary-key",
+      "countryCode": "text not-null",
+      "caseStudyID": "uuid not-null"
+    },
+    "case_study_skill": {
+      "id": "uuid not-null primary-key",
+      "skillID": "uuid not-null",
+      "caseStudyID": "uuid not-null"
+    },
+    "case_study_team": {
+      "id": "uuid not-null primary-key",
+      "teamID": "uuid not-null",
+      "caseStudyID": "uuid not-null"
+    },
+    "case_study_user": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid not-null",
+      "caseStudyID": "uuid not-null",
+      "profileID": "uuid",
+      "general_profile_shared": "uuid"
+    },
+    "collective": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null",
+      "description": "text not-null",
+      "keyWords": "text not-null",
+      "coverPhotoKey": "text",
+      "isActive": "boolean not-null",
+      "created_at": "timestamp",
+      "orgId": "uuid",
+      "createdUserId": "uuid",
+      "isPrivate": "boolean not-null",
+      "isVendor": "boolean not-null"
+    },
+    "collective_case_study": {
+      "id": "uuid not-null primary-key",
+      "collectiveId": "uuid not-null",
+      "caseStudyId": "uuid not-null",
+      "created_at": "timestamp"
+    },
+    "collective_company": {
+      "id": "uuid not-null primary-key",
+      "collectiveId": "uuid not-null",
+      "companyId": "uuid not-null"
+    },
+    "collective_completion_status": {
+      "id": "uuid not-null primary-key",
+      "overview": "boolean not-null",
+      "organisations": "boolean not-null",
+      "talent": "boolean not-null",
+      "clients": "boolean not-null",
+      "case_studies": "boolean not-null",
+      "updated_at": "timestamp not-null",
+      "completed_at": "timestamp",
+      "collective_id": "uuid not-null",
+      "precentage": "integer"
+    },
+    "collective_organisation": {
+      "id": "uuid not-null primary-key",
+      "collectiveId": "uuid not-null",
+      "orgId": "uuid not-null",
+      "status": "text not-null",
+      "name": "text not-null",
+      "created_at": "timestamp",
+      "updated_at": "timestamp",
+      "request_token": "text",
+      "rejectMessage": "text"
+    },
+    "collective_recommendations": {
+      "id": "uuid not-null primary-key",
+      "orgId": "uuid not-null",
+      "recommendedCollectiveId": "uuid not-null",
+      "status": "text not-null",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null"
+    },
+    "collective_rule": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null",
+      "description": "text",
+      "type": "text not-null",
+      "collectiveId": "uuid not-null",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "isRequired": "boolean not-null"
+    },
+    "collective_rule_document": {
+      "id": "uuid not-null primary-key",
+      "fileKey": "text not-null",
+      "created_at": "timestamp not-null",
+      "collectiveRuleId": "uuid not-null"
+    },
+    "collective_solutions": {
+      "id": "uuid not-null primary-key",
+      "collectiveId": "uuid not-null",
+      "solutionId": "uuid not-null",
+      "created_at": "timestamp not-null"
+    },
+    "collective_user": {
+      "id": "uuid not-null primary-key",
+      "collectiveId": "uuid not-null",
+      "userId": "uuid not-null",
+      "orgId": "uuid",
+      "created_at": "timestamp"
+    },
+    "company": {
+      "id": "uuid not-null primary-key",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "logoKey": "text",
+      "industryID": "uuid",
+      "website": "text",
+      "companyContactID": "uuid",
+      "companyTeamID": "uuid",
+      "name": "text not-null",
+      "orgId": "uuid not-null",
+      "noOfEmployees": "text",
+      "isDeleted": "boolean not-null",
+      "discoverability": "text not-null",
+      "isFeatured": "boolean not-null",
+      "order": "integer",
+      "deletedAt": "timestamp",
+      "isOrgCompany": "boolean not-null"
+    },
+    "company_contact": {
+      "id": "uuid not-null primary-key",
+      "primaryContact": "text not-null",
+      "email": "text not-null",
+      "secondaryContact": "text",
+      "secondaryContactEmail": "text",
+      "addressLine1": "text not-null",
+      "addressLine2": "text",
+      "country": "text not-null",
+      "stateOrProvince": "text not-null",
+      "city": "text not-null",
+      "zipOrPostalCode": "text not-null",
+      "phone": "text"
+    },
+    "company_team": {
+      "id": "uuid not-null primary-key",
+      "accountLeadID": "uuid"
+    },
+    "company_team_contributor": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid not-null",
+      "companyTeamID": "uuid not-null",
+      "companyID": "uuid"
+    },
+    "company_team_member": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid not-null",
+      "companyID": "uuid not-null"
+    },
+    "contributor_type": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "cos_features": {
+      "featureId": "uuid not-null primary-key",
+      "name": "text not-null",
+      "slug": "text not-null",
+      "subscription": "text not-null",
+      "parentId": "uuid",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "toggling": "boolean",
+      "permissions": "text[]"
+    },
+    "cos_modules": {
+      "moduleId": "uuid not-null primary-key",
+      "moduleName": "text not-null",
+      "tables": "text",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "slug": "text not-null"
+    },
+    "cos_notification_categories": {
+      "notification_category": "text not-null primary-key",
+      "variables": "json"
+    },
+    "cos_notification_types": {
+      "notification_id": "uuid not-null primary-key",
+      "notification_name": "text not-null",
+      "notification_category": "text not-null",
+      "notification_action": "text not-null"
+    },
+    "cos_notifications": {
+      "notification_id": "uuid not-null primary-key",
+      "notification_name": "text not-null",
+      "email": "boolean not-null",
+      "in_app": "boolean not-null",
+      "email_template": "text not-null",
+      "in_app_template": "text not-null",
+      "notification_category": "text not-null",
+      "notification_action": "text not-null",
+      "email_subject": "text"
+    },
+    "cos_org_notification_settings": {
+      "notification_action": "text not-null",
+      "orgId": "uuid not-null",
+      "email": "boolean not-null",
+      "in_app": "boolean not-null",
+      "email_template": "text",
+      "in_app_template": "text",
+      "email_subject": "text"
+    },
+    "cos_roles_capabilities": {
+      "id": "uuid not-null primary-key",
+      "roleId": "uuid not-null",
+      "capabilityId": "uuid not-null"
+    },
+    "cos_rules": {
+      "ruleId": "uuid not-null primary-key",
+      "title": "text not-null",
+      "description": "text not-null",
+      "ruleJson": "json",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "featureSlug": "text",
+      "orgId": "uuid not-null"
+    },
+    "cos_rules_features": {
+      "cos_rule_id": "uuid not-null",
+      "cos_features_slug": "text not-null"
+    },
+    "cos_user_capabilities": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null",
+      "slug": "text not-null",
+      "featureId": "uuid not-null",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "operations": "text"
+    },
+    "cos_user_notification_settings": {
+      "notification_action": "text not-null",
+      "user_id": "uuid not-null",
+      "enable": "boolean not-null",
+      "orgId": "uuid not-null"
+    },
+    "cos_user_notifications": {
+      "notification_id": "uuid not-null primary-key",
+      "user_id": "uuid not-null",
+      "notification_action": "text not-null",
+      "notification_content_in_app": "text not-null",
+      "notification_content_email": "text not-null",
+      "is_read": "boolean not-null",
+      "is_delivered": "boolean not-null",
+      "created_at": "timestamp",
+      "updated_at": "timestamp",
+      "isConfirmationNotification": "boolean",
+      "isConfirmed": "boolean",
+      "orgId": "uuid not-null",
+      "joint_company_id": "text",
+      "joint_user_id": "text",
+      "categoryItemId": "uuid",
+      "redirectParams": "text"
+    },
+    "cos_user_roles": {
+      "roleId": "uuid not-null primary-key",
+      "name": "text not-null",
+      "slug": "text not-null",
+      "colorCode": "text",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp",
+      "orgId": "uuid not-null",
+      "readOnly": "boolean",
+      "lastModifiedUser": "uuid",
+      "globalRoleId": "uuid",
+      "onboarding_description": "text"
+    },
+    "cos_user_rules": {
+      "userId": "uuid not-null",
+      "ruleId": "uuid not-null"
+    },
+    "custom_payout": {
+      "id": "uuid not-null primary-key",
+      "created_at": "timestamp not-null",
+      "attachments": "text",
+      "additionalNotes": "text",
+      "invoiceID": "integer not-null",
+      "status": "text not-null"
+    },
+    "custom_payout_line_item": {
+      "id": "uuid not-null primary-key",
+      "teamMemberID": "uuid not-null",
+      "productOrServiceID": "uuid not-null",
+      "price": "numeric not-null",
+      "customPayoutID": "uuid not-null"
+    },
+    "custom_project_distribution": {
+      "id": "uuid not-null primary-key",
+      "customProjectLineItemID": "uuid not-null",
+      "currency": "text not-null",
+      "isPaid": "boolean",
+      "paidOn": "timestamp"
+    },
+    "custom_project_payout_distribution": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid",
+      "percentage": "double precision not-null",
+      "contributorTypeID": "uuid not-null",
+      "customProjectDistributionID": "uuid not-null",
+      "isPaid": "boolean",
+      "paidOn": "timestamp"
+    },
+    "customer": {
+      "id": "uuid not-null primary-key",
+      "billingFrequencyID": "uuid",
+      "billingCurrency": "text not-null",
+      "latePaymentFees": "numeric",
+      "latePaymentPeriodThreshold": "integer",
+      "latePaymentPeriodID": "uuid",
+      "latePaymentNotificationThreshold": "integer",
+      "qbID": "text",
+      "legacyCustomerID": "text",
+      "additionalEmails": "text",
+      "billingPrimaryContact": "text",
+      "billingEmail": "text",
+      "isLatePayments": "boolean not-null",
+      "companyID": "uuid not-null",
+      "paymentTerm": "integer",
+      "latePaymentPeriodType": "text"
+    },
+    "customer_closing_party": {
+      "userMetaID": "uuid not-null",
+      "customerID": "uuid not-null",
+      "percentage": "double precision not-null"
+    },
+    "customer_originating_party": {
+      "userMetaID": "uuid not-null",
+      "customerID": "uuid not-null",
+      "percentage": "double precision"
+    },
+    "customer_referrer": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid not-null",
+      "customerID": "uuid not-null",
+      "percentage": "integer not-null"
+    },
+    "data_export_cos_notification": {
+      "id": "uuid not-null primary-key",
+      "orgId": "uuid not-null",
+      "notificationId": "uuid not-null",
+      "created_at": "timestamp"
+    },
+    "data_export_opportunity": {
+      "id": "uuid not-null primary-key",
+      "orgId": "uuid not-null",
+      "opportunityId": "uuid not-null",
+      "created_at": "timestamp"
+    },
+    "data_export_organisation": {
+      "id": "uuid not-null primary-key",
+      "orgId": "uuid not-null",
+      "created_at": "timestamp"
+    },
+    "data_export_user": {
+      "id": "uuid not-null primary-key",
+      "orgId": "uuid not-null",
+      "userId": "uuid not-null",
+      "created_at": "timestamp"
+    },
+    "document": {
+      "id": "uuid not-null primary-key",
+      "documentTypeID": "uuid not-null",
+      "name": "text not-null",
+      "effectiveDate": "timestamp",
+      "nonSolicitLength": "integer",
+      "expirationDate": "timestamp",
+      "nonCompeteLength": "integer",
+      "noPublicityClauseLength": "integer",
+      "nonSolicitFrequency": "text",
+      "nonCompeteFrequency": "text",
+      "noPublicityClauseFrequency": "text",
+      "documentKey": "text not-null",
+      "uploadedByUserCognitoSub": "text not-null",
+      "uploadedByUserIdentityID": "text not-null",
+      "isPrivate": "boolean not-null",
+      "status": "boolean"
+    },
+    "document_associated_company": {
+      "id": "uuid not-null primary-key",
+      "companyID": "uuid not-null",
+      "documentID": "uuid not-null"
+    },
+    "document_associated_user": {
+      "id": "uuid not-null primary-key",
+      "documentID": "uuid not-null",
+      "userMetaID": "uuid not-null"
+    },
+    "document_type": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "email_log": {
+      "id": "integer not-null primary-key",
+      "type": "text not-null",
+      "payload": "text",
+      "created_at": "timestamp not-null",
+      "to_addresses": "text not-null",
+      "is_all_email_sended": "boolean not-null"
+    },
+    "global_user_roles": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null",
+      "slug": "text not-null"
+    },
+    "industry": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "job_category": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null",
+      "description": "text"
+    },
+    "job_role": {
+      "id": "uuid not-null primary-key",
+      "job_role_category": "uuid not-null",
+      "role_name": "text not-null",
+      "created_at": "timestamp",
+      "updated_at": "timestamp"
+    },
+    "late_payment_period": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "option": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "org_matchmaking_requests": {
+      "id": "uuid not-null primary-key",
+      "orgId": "uuid not-null",
+      "requestedOrgId": "uuid not-null",
+      "status": "text not-null",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null"
+    },
+    "org_solution": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "organisation": {
+      "id": "uuid not-null primary-key",
+      "domain": "text not-null",
+      "org_representative_id": "uuid",
+      "googleDriveFolderId": "text",
+      "created_at": "timestamp",
+      "apiKey": "text",
+      "isEnterpriseEnabled": "boolean",
+      "active": "boolean not-null",
+      "isSlackBotEnabled": "boolean not-null",
+      "slackAccessToken": "text",
+      "invitationId": "uuid",
+      "hasFetchedProxyCurlEmployees": "boolean not-null"
+    },
+    "skill": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "team": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "user_basic_information": {
+      "id": "uuid not-null primary-key",
+      "phone": "text",
+      "addressLine1": "text",
+      "addressLine2": "text",
+      "country": "text",
+      "stateOrProvince": "text",
+      "city": "text",
+      "zipOrPostalCode": "text",
+      "userMetaID": "uuid not-null",
+      "dob": "date",
+      "emergencyContactEmail": "text",
+      "emergencyContactPhone": "text",
+      "emergencyContactRelationship": "text",
+      "emergencyContactName": "text"
+    },
+    "user_job_role": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid not-null",
+      "jobRoleID": "uuid not-null"
+    },
+    "user_meta": {
+      "id": "uuid not-null primary-key",
+      "created_at": "timestamp not-null",
+      "updated_at": "timestamp not-null",
+      "username": "text not-null",
+      "cognitoSub": "text not-null",
+      "firstName": "text not-null",
+      "lastName": "text",
+      "email": "text not-null",
+      "about": "text",
+      "avatarKey": "text",
+      "lastPasswordResetAt": "timestamp",
+      "userProfileVisibilityID": "uuid",
+      "isAPIUser": "boolean not-null",
+      "slackID": "text",
+      "joinedDate": "timestamp",
+      "workEmail": "text",
+      "slackNotificationPausingAt": "timestamp",
+      "slackNotificationPausedUntil": "timestamp",
+      "companyID": "uuid",
+      "enabled": "boolean",
+      "orgId": "uuid not-null",
+      "status": "text not-null",
+      "invitation_token": "text",
+      "isPersonaInfoUpdated": "boolean not-null",
+      "last_shared_at": "timestamp",
+      "discoverability": "text not-null",
+      "last_updated_at": "timestamp not-null",
+      "klaviyoId": "text",
+      "onboarding_progress": "integer",
+      "title": "text",
+      "dataEnrichmentConsentAt": "timestamp",
+      "internalTags": "text",
+      "order": "integer",
+      "isSelfManaged": "boolean not-null"
+    },
+    "user_profile": {
+      "id": "uuid not-null primary-key",
+      "userMetaID": "uuid not-null",
+      "visibility": "text not-null"
+    },
+    "user_profile_visibility": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    },
+    "user_role": {
+      "id": "uuid not-null primary-key",
+      "name": "text not-null"
+    }
+  },
+  "relations": [
+    {
+      "name": "account_plan_capabilities_to_account_plan",
+      "from": "account_plan_capabilities.accountPlanId",
+      "to": "account_plan.id"
+    },
+    {
+      "name": "account_plan_capabilities_to_cos_user_capabilities",
+      "from": "account_plan_capabilities.capabilityId",
+      "to": "cos_user_capabilities.id"
+    },
+    {
+      "name": "account_plan_options_to_account_plan",
+      "from": "account_plan_options.accountPlanId",
+      "to": "account_plan.id"
+    },
+    {
+      "name": "account_plan_options_to_option",
+      "from": "account_plan_options.optionId",
+      "to": "option.id"
+    },
+    {
+      "name": "activity_log_to_user_meta",
+      "from": "activity_log.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "activity_log_to_organisation",
+      "from": "activity_log.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "activity_log_to_document",
+      "from": "activity_log.documentID",
+      "to": "document.id"
+    },
+    {
+      "name": "activity_log_to_activity_location",
+      "from": "activity_log.locationSlug",
+      "to": "activity_location.value"
+    },
+    {
+      "name": "admin_tips_permission_roles_to_admin_tips",
+      "from": "admin_tips_permission_roles.admin_tip_id",
+      "to": "admin_tips.id"
+    },
+    {
+      "name": "admin_tips_permission_roles_to_user_role",
+      "from": "admin_tips_permission_roles.user_role_id",
+      "to": "user_role.id"
+    },
+    {
+      "name": "case_study_to_organisation",
+      "from": "case_study.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "case_study_to_user_meta",
+      "from": "case_study.authorId",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "case_study_company_to_company",
+      "from": "case_study_company.companyID",
+      "to": "company.id"
+    },
+    {
+      "name": "case_study_company_to_case_study",
+      "from": "case_study_company.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_gallery_to_case_study",
+      "from": "case_study_gallery.case_study_id",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_industry_to_industry",
+      "from": "case_study_industry.industryID",
+      "to": "industry.id"
+    },
+    {
+      "name": "case_study_industry_to_case_study",
+      "from": "case_study_industry.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_language_to_case_study",
+      "from": "case_study_language.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_links_to_case_study",
+      "from": "case_study_links.case_study_id",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_market_to_case_study",
+      "from": "case_study_market.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_skill_to_skill",
+      "from": "case_study_skill.skillID",
+      "to": "skill.id"
+    },
+    {
+      "name": "case_study_skill_to_case_study",
+      "from": "case_study_skill.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_team_to_team",
+      "from": "case_study_team.teamID",
+      "to": "team.id"
+    },
+    {
+      "name": "case_study_team_to_case_study",
+      "from": "case_study_team.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_user_to_user_meta",
+      "from": "case_study_user.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "case_study_user_to_case_study",
+      "from": "case_study_user.caseStudyID",
+      "to": "case_study.id"
+    },
+    {
+      "name": "case_study_user_to_user_profile",
+      "from": "case_study_user.profileID",
+      "to": "user_profile.id"
+    },
+    {
+      "name": "case_study_user_to_general_profile_shared",
+      "from": "case_study_user.general_profile_shared",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "collective_to_organisation",
+      "from": "collective.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "collective_to_user_meta",
+      "from": "collective.createdUserId",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "collective_case_study_to_collective",
+      "from": "collective_case_study.collectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_case_study_to_case_study",
+      "from": "collective_case_study.caseStudyId",
+      "to": "case_study.id"
+    },
+    {
+      "name": "collective_company_to_collective",
+      "from": "collective_company.collectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_company_to_company",
+      "from": "collective_company.companyId",
+      "to": "company.id"
+    },
+    {
+      "name": "collective_completion_status_to_collective",
+      "from": "collective_completion_status.collective_id",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_organisation_to_collective",
+      "from": "collective_organisation.collectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_organisation_to_organisation",
+      "from": "collective_organisation.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "collective_recommendations_to_organisation",
+      "from": "collective_recommendations.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "collective_recommendations_to_collective",
+      "from": "collective_recommendations.recommendedCollectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_rule_to_collective",
+      "from": "collective_rule.collectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_rule_document_to_collective_rule",
+      "from": "collective_rule_document.collectiveRuleId",
+      "to": "collective_rule.id"
+    },
+    {
+      "name": "collective_solutions_to_collective",
+      "from": "collective_solutions.collectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_solutions_to_org_solution",
+      "from": "collective_solutions.solutionId",
+      "to": "org_solution.id"
+    },
+    {
+      "name": "collective_user_to_collective",
+      "from": "collective_user.collectiveId",
+      "to": "collective.id"
+    },
+    {
+      "name": "collective_user_to_user_meta",
+      "from": "collective_user.userId",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "collective_user_to_organisation",
+      "from": "collective_user.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "company_to_organisation",
+      "from": "company.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "company_to_industry",
+      "from": "company.industryID",
+      "to": "industry.id"
+    },
+    {
+      "name": "company_to_company_contact",
+      "from": "company.companyContactID",
+      "to": "company_contact.id"
+    },
+    {
+      "name": "company_to_company_team",
+      "from": "company.companyTeamID",
+      "to": "company_team.id"
+    },
+    {
+      "name": "company_team_to_user_meta",
+      "from": "company_team.accountLeadID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "company_team_contributor_to_user_meta",
+      "from": "company_team_contributor.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "company_team_contributor_to_company_team",
+      "from": "company_team_contributor.companyTeamID",
+      "to": "company_team.id"
+    },
+    {
+      "name": "company_team_contributor_to_company",
+      "from": "company_team_contributor.companyID",
+      "to": "company.id"
+    },
+    {
+      "name": "company_team_member_to_user_meta",
+      "from": "company_team_member.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "company_team_member_to_company",
+      "from": "company_team_member.companyID",
+      "to": "company.id"
+    },
+    {
+      "name": "cos_notification_types_to_notification_categories",
+      "from": "cos_notification_types.notification_category",
+      "to": "cos_notification_categories.notification_category"
+    },
+    {
+      "name": "cos_notification_types_to_activity_location",
+      "from": "cos_notification_types.notification_action",
+      "to": "activity_location.value"
+    },
+    {
+      "name": "cos_notifications_to_notification_categories",
+      "from": "cos_notifications.notification_category",
+      "to": "cos_notification_categories.notification_category"
+    },
+    {
+      "name": "cos_notifications_to_activity_location",
+      "from": "cos_notifications.notification_action",
+      "to": "activity_location.value"
+    },
+    {
+      "name": "cos_org_notification_settings_to_organisation",
+      "from": "cos_org_notification_settings.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "cos_org_notification_settings_to_activity_location",
+      "from": "cos_org_notification_settings.notification_action",
+      "to": "activity_location.value"
+    },
+    {
+      "name": "cos_roles_capabilities_to_cos_user_roles",
+      "from": "cos_roles_capabilities.roleId",
+      "to": "cos_user_roles.roleId"
+    },
+    {
+      "name": "cos_roles_capabilities_to_cos_user_capabilities",
+      "from": "cos_roles_capabilities.capabilityId",
+      "to": "cos_user_capabilities.id"
+    },
+    {
+      "name": "cos_rules_to_organisation",
+      "from": "cos_rules.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "cos_rules_features_to_cos_rules",
+      "from": "cos_rules_features.cos_rule_id",
+      "to": "cos_rules.ruleId"
+    },
+    {
+      "name": "cos_rules_features_to_cos_features",
+      "from": "cos_rules_features.cos_features_slug",
+      "to": "cos_features.slug"
+    },
+    {
+      "name": "cos_user_capabilities_to_cos_modules",
+      "from": "cos_user_capabilities.featureId",
+      "to": "cos_modules.moduleId"
+    },
+    {
+      "name": "cos_user_notification_settings_to_user_meta",
+      "from": "cos_user_notification_settings.user_id",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "cos_user_notification_settings_to_organisation",
+      "from": "cos_user_notification_settings.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "cos_user_notification_settings_to_activity_location",
+      "from": "cos_user_notification_settings.notification_action",
+      "to": "activity_location.value"
+    },
+    {
+      "name": "cos_user_notifications_to_user_meta",
+      "from": "cos_user_notifications.user_id",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "cos_user_notifications_to_organisation",
+      "from": "cos_user_notifications.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "cos_user_notifications_to_activity_location",
+      "from": "cos_user_notifications.notification_action",
+      "to": "activity_location.value"
+    },
+    {
+      "name": "cos_user_roles_to_organisation",
+      "from": "cos_user_roles.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "cos_user_roles_to_user_meta",
+      "from": "cos_user_roles.lastModifiedUser",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "cos_user_roles_to_global_user_roles",
+      "from": "cos_user_roles.globalRoleId",
+      "to": "global_user_roles.id"
+    },
+    {
+      "name": "cos_user_rules_to_user_meta",
+      "from": "cos_user_rules.userId",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "cos_user_rules_to_cos_rules",
+      "from": "cos_user_rules.ruleId",
+      "to": "cos_rules.ruleId"
+    },
+    {
+      "name": "custom_payout_line_item_to_user_meta",
+      "from": "custom_payout_line_item.teamMemberID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "custom_payout_line_item_to_custom_payout",
+      "from": "custom_payout_line_item.customPayoutID",
+      "to": "custom_payout.id"
+    },
+    {
+      "name": "custom_project_distribution_to_custom_payout_line_item",
+      "from": "custom_project_distribution.customProjectLineItemID",
+      "to": "custom_payout_line_item.id"
+    },
+    {
+      "name": "custom_project_payout_distribution_to_user_meta",
+      "from": "custom_project_payout_distribution.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "custom_project_payout_distribution_to_contributor_type",
+      "from": "custom_project_payout_distribution.contributorTypeID",
+      "to": "contributor_type.id"
+    },
+    {
+      "name": "custom_project_payout_distribution_to_custom_project_distribution",
+      "from": "custom_project_payout_distribution.customProjectDistributionID",
+      "to": "custom_project_distribution.id"
+    },
+    {
+      "name": "customer_to_billing_frequency",
+      "from": "customer.billingFrequencyID",
+      "to": "billing_frequency.id"
+    },
+    {
+      "name": "customer_to_late_payment_period",
+      "from": "customer.latePaymentPeriodID",
+      "to": "late_payment_period.id"
+    },
+    {
+      "name": "customer_to_company",
+      "from": "customer.companyID",
+      "to": "company.id"
+    },
+    {
+      "name": "customer_closing_party_to_user_meta",
+      "from": "customer_closing_party.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "customer_closing_party_to_customer",
+      "from": "customer_closing_party.customerID",
+      "to": "customer.id"
+    },
+    {
+      "name": "customer_originating_party_to_user_meta",
+      "from": "customer_originating_party.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "customer_originating_party_to_customer",
+      "from": "customer_originating_party.customerID",
+      "to": "customer.id"
+    },
+    {
+      "name": "customer_referrer_to_user_meta",
+      "from": "customer_referrer.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "customer_referrer_to_customer",
+      "from": "customer_referrer.customerID",
+      "to": "customer.id"
+    },
+    {
+      "name": "data_export_cos_notification_to_organisation",
+      "from": "data_export_cos_notification.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "data_export_cos_notification_to_cos_notifications",
+      "from": "data_export_cos_notification.notificationId",
+      "to": "cos_notifications.notification_id"
+    },
+    {
+      "name": "data_export_opportunity_to_organisation",
+      "from": "data_export_opportunity.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "data_export_organisation_to_organisation",
+      "from": "data_export_organisation.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "data_export_user_to_organisation",
+      "from": "data_export_user.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "data_export_user_to_user_meta",
+      "from": "data_export_user.userId",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "document_to_document_type",
+      "from": "document.documentTypeID",
+      "to": "document_type.id"
+    },
+    {
+      "name": "document_to_user_meta",
+      "from": "document.uploadedByUserCognitoSub",
+      "to": "user_meta.cognitoSub"
+    },
+    {
+      "name": "document_associated_company_to_company",
+      "from": "document_associated_company.companyID",
+      "to": "company.id"
+    },
+    {
+      "name": "document_associated_company_to_document",
+      "from": "document_associated_company.documentID",
+      "to": "document.id"
+    },
+    {
+      "name": "document_associated_user_to_document",
+      "from": "document_associated_user.documentID",
+      "to": "document.id"
+    },
+    {
+      "name": "document_associated_user_to_user_meta",
+      "from": "document_associated_user.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "job_role_to_job_category",
+      "from": "job_role.job_role_category",
+      "to": "job_category.id"
+    },
+    {
+      "name": "user_basic_information_to_user_meta",
+      "from": "user_basic_information.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "user_job_role_to_user_meta",
+      "from": "user_job_role.userMetaID",
+      "to": "user_meta.id"
+    },
+    {
+      "name": "user_job_role_to_job_role",
+      "from": "user_job_role.jobRoleID",
+      "to": "job_role.id"
+    },
+    {
+      "name": "user_meta_to_company",
+      "from": "user_meta.companyID",
+      "to": "company.id"
+    },
+    {
+      "name": "user_meta_to_organisation",
+      "from": "user_meta.orgId",
+      "to": "organisation.id"
+    },
+    {
+      "name": "user_meta_to_user_profile_visibility",
+      "from": "user_meta.userProfileVisibilityID",
+      "to": "user_profile_visibility.id"
+    },
+    {
+      "name": "user_profile_to_user_meta",
+      "from": "user_profile.userMetaID",
+      "to": "user_meta.id"
+    }
+  ]
+}
