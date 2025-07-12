@@ -649,573 +649,573 @@
   "relations": [
     {
       "name": "account_plan_capabilities_to_account_plan",
-      "from": "account_plan_capabilities.accountPlanId",
-      "to": "account_plan.id"
+      "from": "account_plan.id",
+      "to": "account_plan_capabilities.accountPlanId"
     },
     {
       "name": "account_plan_capabilities_to_cos_user_capabilities",
-      "from": "account_plan_capabilities.capabilityId",
-      "to": "cos_user_capabilities.id"
+      "from": "cos_user_capabilities.id",
+      "to": "account_plan_capabilities.capabilityId"
     },
     {
       "name": "account_plan_options_to_account_plan",
-      "from": "account_plan_options.accountPlanId",
-      "to": "account_plan.id"
+      "from": "account_plan.id",
+      "to": "account_plan_options.accountPlanId"
     },
     {
       "name": "account_plan_options_to_option",
-      "from": "account_plan_options.optionId",
-      "to": "option.id"
+      "from": "option.id",
+      "to": "account_plan_options.optionId"
     },
     {
       "name": "activity_log_to_user_meta",
-      "from": "activity_log.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "activity_log.userMetaID"
     },
     {
       "name": "activity_log_to_organisation",
-      "from": "activity_log.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "activity_log.orgId"
     },
     {
       "name": "activity_log_to_document",
-      "from": "activity_log.documentID",
-      "to": "document.id"
+      "from": "document.id",
+      "to": "activity_log.documentID"
     },
     {
       "name": "activity_log_to_activity_location",
-      "from": "activity_log.locationSlug",
-      "to": "activity_location.value"
+      "from": "activity_location.value",
+      "to": "activity_log.locationSlug"
     },
     {
       "name": "admin_tips_permission_roles_to_admin_tips",
-      "from": "admin_tips_permission_roles.admin_tip_id",
-      "to": "admin_tips.id"
+      "from": "admin_tips.id",
+      "to": "admin_tips_permission_roles.admin_tip_id"
     },
     {
       "name": "admin_tips_permission_roles_to_user_role",
-      "from": "admin_tips_permission_roles.user_role_id",
-      "to": "user_role.id"
+      "from": "user_role.id",
+      "to": "admin_tips_permission_roles.user_role_id"
     },
     {
       "name": "case_study_to_organisation",
-      "from": "case_study.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "case_study.orgId"
     },
     {
       "name": "case_study_to_user_meta",
-      "from": "case_study.authorId",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "case_study.authorId"
     },
     {
       "name": "case_study_company_to_company",
-      "from": "case_study_company.companyID",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "case_study_company.companyID"
     },
     {
       "name": "case_study_company_to_case_study",
-      "from": "case_study_company.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_company.caseStudyID"
     },
     {
       "name": "case_study_gallery_to_case_study",
-      "from": "case_study_gallery.case_study_id",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_gallery.case_study_id"
     },
     {
       "name": "case_study_industry_to_industry",
-      "from": "case_study_industry.industryID",
-      "to": "industry.id"
+      "from": "industry.id",
+      "to": "case_study_industry.industryID"
     },
     {
       "name": "case_study_industry_to_case_study",
-      "from": "case_study_industry.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_industry.caseStudyID"
     },
     {
       "name": "case_study_language_to_case_study",
-      "from": "case_study_language.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_language.caseStudyID"
     },
     {
       "name": "case_study_links_to_case_study",
-      "from": "case_study_links.case_study_id",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_links.case_study_id"
     },
     {
       "name": "case_study_market_to_case_study",
-      "from": "case_study_market.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_market.caseStudyID"
     },
     {
       "name": "case_study_skill_to_skill",
-      "from": "case_study_skill.skillID",
-      "to": "skill.id"
+      "from": "skill.id",
+      "to": "case_study_skill.skillID"
     },
     {
       "name": "case_study_skill_to_case_study",
-      "from": "case_study_skill.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_skill.caseStudyID"
     },
     {
       "name": "case_study_team_to_team",
-      "from": "case_study_team.teamID",
-      "to": "team.id"
+      "from": "team.id",
+      "to": "case_study_team.teamID"
     },
     {
       "name": "case_study_team_to_case_study",
-      "from": "case_study_team.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_team.caseStudyID"
     },
     {
       "name": "case_study_user_to_user_meta",
-      "from": "case_study_user.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "case_study_user.userMetaID"
     },
     {
       "name": "case_study_user_to_case_study",
-      "from": "case_study_user.caseStudyID",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "case_study_user.caseStudyID"
     },
     {
       "name": "case_study_user_to_user_profile",
-      "from": "case_study_user.profileID",
-      "to": "user_profile.id"
+      "from": "user_profile.id",
+      "to": "case_study_user.profileID"
     },
     {
       "name": "case_study_user_to_general_profile_shared",
-      "from": "case_study_user.general_profile_shared",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "case_study_user.general_profile_shared"
     },
     {
       "name": "collective_to_organisation",
-      "from": "collective.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "collective.orgId"
     },
     {
       "name": "collective_to_user_meta",
-      "from": "collective.createdUserId",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "collective.createdUserId"
     },
     {
       "name": "collective_case_study_to_collective",
-      "from": "collective_case_study.collectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_case_study.collectiveId"
     },
     {
       "name": "collective_case_study_to_case_study",
-      "from": "collective_case_study.caseStudyId",
-      "to": "case_study.id"
+      "from": "case_study.id",
+      "to": "collective_case_study.caseStudyId"
     },
     {
       "name": "collective_company_to_collective",
-      "from": "collective_company.collectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_company.collectiveId"
     },
     {
       "name": "collective_company_to_company",
-      "from": "collective_company.companyId",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "collective_company.companyId"
     },
     {
       "name": "collective_completion_status_to_collective",
-      "from": "collective_completion_status.collective_id",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_completion_status.collective_id"
     },
     {
       "name": "collective_organisation_to_collective",
-      "from": "collective_organisation.collectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_organisation.collectiveId"
     },
     {
       "name": "collective_organisation_to_organisation",
-      "from": "collective_organisation.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "collective_organisation.orgId"
     },
     {
       "name": "collective_recommendations_to_organisation",
-      "from": "collective_recommendations.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "collective_recommendations.orgId"
     },
     {
       "name": "collective_recommendations_to_collective",
-      "from": "collective_recommendations.recommendedCollectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_recommendations.recommendedCollectiveId"
     },
     {
       "name": "collective_rule_to_collective",
-      "from": "collective_rule.collectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_rule.collectiveId"
     },
     {
       "name": "collective_rule_document_to_collective_rule",
-      "from": "collective_rule_document.collectiveRuleId",
-      "to": "collective_rule.id"
+      "from": "collective_rule.id",
+      "to": "collective_rule_document.collectiveRuleId"
     },
     {
       "name": "collective_solutions_to_collective",
-      "from": "collective_solutions.collectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_solutions.collectiveId"
     },
     {
       "name": "collective_solutions_to_org_solution",
-      "from": "collective_solutions.solutionId",
-      "to": "org_solution.id"
+      "from": "org_solution.id",
+      "to": "collective_solutions.solutionId"
     },
     {
       "name": "collective_user_to_collective",
-      "from": "collective_user.collectiveId",
-      "to": "collective.id"
+      "from": "collective.id",
+      "to": "collective_user.collectiveId"
     },
     {
       "name": "collective_user_to_user_meta",
-      "from": "collective_user.userId",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "collective_user.userId"
     },
     {
       "name": "collective_user_to_organisation",
-      "from": "collective_user.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "collective_user.orgId"
     },
     {
       "name": "company_to_organisation",
-      "from": "company.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "company.orgId"
     },
     {
       "name": "company_to_industry",
-      "from": "company.industryID",
-      "to": "industry.id"
+      "from": "industry.id",
+      "to": "company.industryID"
     },
     {
       "name": "company_to_company_contact",
-      "from": "company.companyContactID",
-      "to": "company_contact.id"
+      "from": "company_contact.id",
+      "to": "company.companyContactID"
     },
     {
       "name": "company_to_company_team",
-      "from": "company.companyTeamID",
-      "to": "company_team.id"
+      "from": "company_team.id",
+      "to": "company.companyTeamID"
     },
     {
       "name": "company_team_to_user_meta",
-      "from": "company_team.accountLeadID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "company_team.accountLeadID"
     },
     {
       "name": "company_team_contributor_to_user_meta",
-      "from": "company_team_contributor.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "company_team_contributor.userMetaID"
     },
     {
       "name": "company_team_contributor_to_company_team",
-      "from": "company_team_contributor.companyTeamID",
-      "to": "company_team.id"
+      "from": "company_team.id",
+      "to": "company_team_contributor.companyTeamID"
     },
     {
       "name": "company_team_contributor_to_company",
-      "from": "company_team_contributor.companyID",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "company_team_contributor.companyID"
     },
     {
       "name": "company_team_member_to_user_meta",
-      "from": "company_team_member.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "company_team_member.userMetaID"
     },
     {
       "name": "company_team_member_to_company",
-      "from": "company_team_member.companyID",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "company_team_member.companyID"
     },
     {
       "name": "cos_notification_types_to_notification_categories",
-      "from": "cos_notification_types.notification_category",
-      "to": "cos_notification_categories.notification_category"
+      "from": "cos_notification_categories.notification_category",
+      "to": "cos_notification_types.notification_category"
     },
     {
       "name": "cos_notification_types_to_activity_location",
-      "from": "cos_notification_types.notification_action",
-      "to": "activity_location.value"
+      "from": "activity_location.value",
+      "to": "cos_notification_types.notification_action"
     },
     {
       "name": "cos_notifications_to_notification_categories",
-      "from": "cos_notifications.notification_category",
-      "to": "cos_notification_categories.notification_category"
+      "from": "cos_notification_categories.notification_category",
+      "to": "cos_notifications.notification_category"
     },
     {
       "name": "cos_notifications_to_activity_location",
-      "from": "cos_notifications.notification_action",
-      "to": "activity_location.value"
+      "from": "activity_location.value",
+      "to": "cos_notifications.notification_action"
     },
     {
       "name": "cos_org_notification_settings_to_organisation",
-      "from": "cos_org_notification_settings.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "cos_org_notification_settings.orgId"
     },
     {
       "name": "cos_org_notification_settings_to_activity_location",
-      "from": "cos_org_notification_settings.notification_action",
-      "to": "activity_location.value"
+      "from": "activity_location.value",
+      "to": "cos_org_notification_settings.notification_action"
     },
     {
       "name": "cos_roles_capabilities_to_cos_user_roles",
-      "from": "cos_roles_capabilities.roleId",
-      "to": "cos_user_roles.roleId"
+      "from": "cos_user_roles.roleId",
+      "to": "cos_roles_capabilities.roleId"
     },
     {
       "name": "cos_roles_capabilities_to_cos_user_capabilities",
-      "from": "cos_roles_capabilities.capabilityId",
-      "to": "cos_user_capabilities.id"
+      "from": "cos_user_capabilities.id",
+      "to": "cos_roles_capabilities.capabilityId"
     },
     {
       "name": "cos_rules_to_organisation",
-      "from": "cos_rules.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "cos_rules.orgId"
     },
     {
       "name": "cos_rules_features_to_cos_rules",
-      "from": "cos_rules_features.cos_rule_id",
-      "to": "cos_rules.ruleId"
+      "from": "cos_rules.ruleId",
+      "to": "cos_rules_features.cos_rule_id"
     },
     {
       "name": "cos_rules_features_to_cos_features",
-      "from": "cos_rules_features.cos_features_slug",
-      "to": "cos_features.slug"
+      "from": "cos_features.slug",
+      "to": "cos_rules_features.cos_features_slug"
     },
     {
       "name": "cos_user_capabilities_to_cos_modules",
-      "from": "cos_user_capabilities.featureId",
-      "to": "cos_modules.moduleId"
+      "from": "cos_modules.moduleId",
+      "to": "cos_user_capabilities.featureId"
     },
     {
       "name": "cos_user_notification_settings_to_user_meta",
-      "from": "cos_user_notification_settings.user_id",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "cos_user_notification_settings.user_id"
     },
     {
       "name": "cos_user_notification_settings_to_organisation",
-      "from": "cos_user_notification_settings.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "cos_user_notification_settings.orgId"
     },
     {
       "name": "cos_user_notification_settings_to_activity_location",
-      "from": "cos_user_notification_settings.notification_action",
-      "to": "activity_location.value"
+      "from": "activity_location.value",
+      "to": "cos_user_notification_settings.notification_action"
     },
     {
       "name": "cos_user_notifications_to_user_meta",
-      "from": "cos_user_notifications.user_id",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "cos_user_notifications.user_id"
     },
     {
       "name": "cos_user_notifications_to_organisation",
-      "from": "cos_user_notifications.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "cos_user_notifications.orgId"
     },
     {
       "name": "cos_user_notifications_to_activity_location",
-      "from": "cos_user_notifications.notification_action",
-      "to": "activity_location.value"
+      "from": "activity_location.value",
+      "to": "cos_user_notifications.notification_action"
     },
     {
       "name": "cos_user_roles_to_organisation",
-      "from": "cos_user_roles.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "cos_user_roles.orgId"
     },
     {
       "name": "cos_user_roles_to_user_meta",
-      "from": "cos_user_roles.lastModifiedUser",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "cos_user_roles.lastModifiedUser"
     },
     {
       "name": "cos_user_roles_to_global_user_roles",
-      "from": "cos_user_roles.globalRoleId",
-      "to": "global_user_roles.id"
+      "from": "global_user_roles.id",
+      "to": "cos_user_roles.globalRoleId"
     },
     {
       "name": "cos_user_rules_to_user_meta",
-      "from": "cos_user_rules.userId",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "cos_user_rules.userId"
     },
     {
       "name": "cos_user_rules_to_cos_rules",
-      "from": "cos_user_rules.ruleId",
-      "to": "cos_rules.ruleId"
+      "from": "cos_rules.ruleId",
+      "to": "cos_user_rules.ruleId"
     },
     {
       "name": "custom_payout_line_item_to_user_meta",
-      "from": "custom_payout_line_item.teamMemberID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "custom_payout_line_item.teamMemberID"
     },
     {
       "name": "custom_payout_line_item_to_custom_payout",
-      "from": "custom_payout_line_item.customPayoutID",
-      "to": "custom_payout.id"
+      "from": "custom_payout.id",
+      "to": "custom_payout_line_item.customPayoutID"
     },
     {
       "name": "custom_project_distribution_to_custom_payout_line_item",
-      "from": "custom_project_distribution.customProjectLineItemID",
-      "to": "custom_payout_line_item.id"
+      "from": "custom_payout_line_item.id",
+      "to": "custom_project_distribution.customProjectLineItemID"
     },
     {
       "name": "custom_project_payout_distribution_to_user_meta",
-      "from": "custom_project_payout_distribution.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "custom_project_payout_distribution.userMetaID"
     },
     {
       "name": "custom_project_payout_distribution_to_contributor_type",
-      "from": "custom_project_payout_distribution.contributorTypeID",
-      "to": "contributor_type.id"
+      "from": "contributor_type.id",
+      "to": "custom_project_payout_distribution.contributorTypeID"
     },
     {
       "name": "custom_project_payout_distribution_to_custom_project_distribution",
-      "from": "custom_project_payout_distribution.customProjectDistributionID",
-      "to": "custom_project_distribution.id"
+      "from": "custom_project_distribution.id",
+      "to": "custom_project_payout_distribution.customProjectDistributionID"
     },
     {
       "name": "customer_to_billing_frequency",
-      "from": "customer.billingFrequencyID",
-      "to": "billing_frequency.id"
+      "from": "billing_frequency.id",
+      "to": "customer.billingFrequencyID"
     },
     {
       "name": "customer_to_late_payment_period",
-      "from": "customer.latePaymentPeriodID",
-      "to": "late_payment_period.id"
+      "from": "late_payment_period.id",
+      "to": "customer.latePaymentPeriodID"
     },
     {
       "name": "customer_to_company",
-      "from": "customer.companyID",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "customer.companyID"
     },
     {
       "name": "customer_closing_party_to_user_meta",
-      "from": "customer_closing_party.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "customer_closing_party.userMetaID"
     },
     {
       "name": "customer_closing_party_to_customer",
-      "from": "customer_closing_party.customerID",
-      "to": "customer.id"
+      "from": "customer.id",
+      "to": "customer_closing_party.customerID"
     },
     {
       "name": "customer_originating_party_to_user_meta",
-      "from": "customer_originating_party.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "customer_originating_party.userMetaID"
     },
     {
       "name": "customer_originating_party_to_customer",
-      "from": "customer_originating_party.customerID",
-      "to": "customer.id"
+      "from": "customer.id",
+      "to": "customer_originating_party.customerID"
     },
     {
       "name": "customer_referrer_to_user_meta",
-      "from": "customer_referrer.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "customer_referrer.userMetaID"
     },
     {
       "name": "customer_referrer_to_customer",
-      "from": "customer_referrer.customerID",
-      "to": "customer.id"
+      "from": "customer.id",
+      "to": "customer_referrer.customerID"
     },
     {
       "name": "data_export_cos_notification_to_organisation",
-      "from": "data_export_cos_notification.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "data_export_cos_notification.orgId"
     },
     {
       "name": "data_export_cos_notification_to_cos_notifications",
-      "from": "data_export_cos_notification.notificationId",
-      "to": "cos_notifications.notification_id"
+      "from": "cos_notifications.notification_id",
+      "to": "data_export_cos_notification.notificationId"
     },
     {
       "name": "data_export_opportunity_to_organisation",
-      "from": "data_export_opportunity.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "data_export_opportunity.orgId"
     },
     {
       "name": "data_export_organisation_to_organisation",
-      "from": "data_export_organisation.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "data_export_organisation.orgId"
     },
     {
       "name": "data_export_user_to_organisation",
-      "from": "data_export_user.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "data_export_user.orgId"
     },
     {
       "name": "data_export_user_to_user_meta",
-      "from": "data_export_user.userId",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "data_export_user.userId"
     },
     {
       "name": "document_to_document_type",
-      "from": "document.documentTypeID",
-      "to": "document_type.id"
+      "from": "document_type.id",
+      "to": "document.documentTypeID"
     },
     {
       "name": "document_to_user_meta",
-      "from": "document.uploadedByUserCognitoSub",
-      "to": "user_meta.cognitoSub"
+      "from": "user_meta.cognitoSub",
+      "to": "document.uploadedByUserCognitoSub"
     },
     {
       "name": "document_associated_company_to_company",
-      "from": "document_associated_company.companyID",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "document_associated_company.companyID"
     },
     {
       "name": "document_associated_company_to_document",
-      "from": "document_associated_company.documentID",
-      "to": "document.id"
+      "from": "document.id",
+      "to": "document_associated_company.documentID"
     },
     {
       "name": "document_associated_user_to_document",
-      "from": "document_associated_user.documentID",
-      "to": "document.id"
+      "from": "document.id",
+      "to": "document_associated_user.documentID"
     },
     {
       "name": "document_associated_user_to_user_meta",
-      "from": "document_associated_user.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "document_associated_user.userMetaID"
     },
     {
       "name": "job_role_to_job_category",
-      "from": "job_role.job_role_category",
-      "to": "job_category.id"
+      "from": "job_category.id",
+      "to": "job_role.job_role_category"
     },
     {
       "name": "user_basic_information_to_user_meta",
-      "from": "user_basic_information.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "user_basic_information.userMetaID"
     },
     {
       "name": "user_job_role_to_user_meta",
-      "from": "user_job_role.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "user_job_role.userMetaID"
     },
     {
       "name": "user_job_role_to_job_role",
-      "from": "user_job_role.jobRoleID",
-      "to": "job_role.id"
+      "from": "job_role.id",
+      "to": "user_job_role.jobRoleID"
     },
     {
       "name": "user_meta_to_company",
-      "from": "user_meta.companyID",
-      "to": "company.id"
+      "from": "company.id",
+      "to": "user_meta.companyID"
     },
     {
       "name": "user_meta_to_organisation",
-      "from": "user_meta.orgId",
-      "to": "organisation.id"
+      "from": "organisation.id",
+      "to": "user_meta.orgId"
     },
     {
       "name": "user_meta_to_user_profile_visibility",
-      "from": "user_meta.userProfileVisibilityID",
-      "to": "user_profile_visibility.id"
+      "from": "user_profile_visibility.id",
+      "to": "user_meta.userProfileVisibilityID"
     },
     {
       "name": "user_profile_to_user_meta",
-      "from": "user_profile.userMetaID",
-      "to": "user_meta.id"
+      "from": "user_meta.id",
+      "to": "user_profile.userMetaID"
     }
   ]
 }
