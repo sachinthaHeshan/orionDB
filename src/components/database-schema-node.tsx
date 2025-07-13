@@ -16,7 +16,7 @@ export const DatabaseSchemaNodeHeader = ({
   children,
 }: DatabaseSchemaNodeHeaderProps) => {
   return (
-    <h2 className="rounded-tl-md rounded-tr-md bg-secondary p-2 text-center text-sm text-muted-foreground">
+    <h2 className="rounded-tl-md rounded-tr-md bg-blue-50 dark:bg-blue-900 p-2 text-center text-sm font-semibold text-blue-800 dark:text-blue-200 border-b border-blue-200 dark:border-blue-700">
       {children}
     </h2>
   );
@@ -52,6 +52,10 @@ export type DatabaseSchemaTableRowProps = {
   attributeName?: string;
   isPrimaryKey?: boolean;
   isForeignKey?: boolean;
+  sourcePosition?: Position;
+  targetPosition?: Position;
+  showSourceHandle?: boolean;
+  showTargetHandle?: boolean;
 };
 
 export const DatabaseSchemaTableRow = ({
@@ -61,30 +65,51 @@ export const DatabaseSchemaTableRow = ({
   attributeName,
   isPrimaryKey,
   isForeignKey,
+  sourcePosition = Position.Right,
+  targetPosition = Position.Left,
+  showSourceHandle = true,
+  showTargetHandle = true,
 }: DatabaseSchemaTableRowProps) => {
   const handleId = `${entityName}-${attributeName}`;
+
+  // Position-based styling for handles
+  const getHandlePositionStyle = (position: Position) => {
+    const baseStyle = "!w-3 !h-3 !absolute";
+    switch (position) {
+      case Position.Left:
+        return `${baseStyle} !-left-2 !top-1/2 !transform !-translate-y-1/2`;
+      case Position.Right:
+        return `${baseStyle} !-right-2 !top-1/2 !transform !-translate-y-1/2`;
+      default:
+        return `${baseStyle} !-right-2 !top-1/2 !transform !-translate-y-1/2`;
+    }
+  };
 
   return (
     <TableRow className={`relative text-xs ${className || ""}`}>
       {/* First cell with handles positioned absolutely */}
       <td className="relative">
-        {/* Left handle for incoming connections */}
-        {isForeignKey && (
+        {/* Target handle for incoming connections */}
+        {isForeignKey && showTargetHandle && (
           <BaseHandle
             type="target"
-            position={Position.Left}
+            position={targetPosition}
             id={`${handleId}-target`}
-            className="!-left-2 !w-3 !h-3 !bg-green-500 !border-green-600 !absolute !top-1/2 !transform !-translate-y-1/2"
+            className={`${getHandlePositionStyle(
+              targetPosition
+            )} !bg-green-500 !border-green-600`}
           />
         )}
 
-        {/* Right handle for outgoing connections */}
-        {isPrimaryKey && (
+        {/* Source handle for outgoing connections */}
+        {isPrimaryKey && showSourceHandle && (
           <BaseHandle
             type="source"
-            position={Position.Right}
+            position={sourcePosition}
             id={`${handleId}-source`}
-            className="!-right-2 !w-3 !h-3 !bg-blue-500 !border-blue-600 !absolute !top-1/2 !transform !-translate-y-1/2"
+            className={`${getHandlePositionStyle(
+              sourcePosition
+            )} !bg-blue-500 !border-blue-600`}
           />
         )}
       </td>

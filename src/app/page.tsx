@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "@xyflow/react/dist/style.css";
 import { TemplateEditor } from "@/components/template-editor";
 import { DiagramVisualization } from "@/components/diagram-visualization";
@@ -8,7 +8,10 @@ import { useERDiagram } from "@/hooks/use-er-diagram";
 import { useNodeSelection } from "@/hooks/use-node-selection";
 import { ERTemplate } from "@/types/er-diagram";
 import { updateNodeStyles, updateEdgeStyles } from "@/utils/node-edge-styling";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, Save } from "lucide-react";
 import defaultTemplate from "@/data/defaultTemplate.json";
+import { useProjects } from "@/hooks/use-projects";
 
 export default function Home() {
   const {
@@ -23,6 +26,15 @@ export default function Home() {
   } = useERDiagram(defaultTemplate as ERTemplate);
   const { selectedNode, onNodeClick, onPaneClick } = useNodeSelection();
   const prevTemplateRef = useRef<ERTemplate>({} as ERTemplate);
+  const [isTemplateCollapsed, setIsTemplateCollapsed] = useState(false);
+  const { currentProject, saveProject } = useProjects();
+
+  // Load current project template when available
+  useEffect(() => {
+    if (currentProject && currentProject.template) {
+      setTemplate(currentProject.template);
+    }
+  }, [currentProject, setTemplate]);
 
   // Handle template update from editor
   const handleTemplateUpdate = (newTemplate: ERTemplate) => {
@@ -40,22 +52,83 @@ export default function Home() {
     }
   }, [template, regenerateNodesAndEdges]);
 
+  // Save current project with updated template
+  const handleSaveProject = () => {
+    if (currentProject) {
+      const updatedProject = {
+        ...currentProject,
+        template,
+        updatedAt: new Date(),
+      };
+      saveProject(updatedProject);
+    }
+  };
+
   // Apply selection styling
   const styledNodes = updateNodeStyles(nodes, edges, selectedNode);
   const styledEdges = updateEdgeStyles(edges, selectedNode);
 
   return (
-    <div className="h-screen flex">
+    <div className="h-full flex bg-black">
+      {/* Top Navigation Bar */}
+      <div className="absolute top-0 left-0 right-0 bg-white border-b z-20 px-4 py-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            {currentProject && (
+              <span className="text-sm text-gray-600">
+                {currentProject.name}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleSaveProject}
+              disabled={!currentProject}
+            >
+              <Save size={16} />
+              Save
+            </Button>
+          </div>
+        </div>
+      </div>
+
       {/* Left Section - Template Editor */}
-      <div className="w-1/2 p-4 border-r">
-        <TemplateEditor
-          initialTemplate={defaultTemplate as ERTemplate}
-          onTemplateUpdate={handleTemplateUpdate}
-        />
+      <div
+        className={`border-r transition-all duration-300 ease-in-out mt-14 ${
+          isTemplateCollapsed ? "w-12" : "w-1/2 max-w-[500px]"
+        }`}
+      >
+        <div className="relative h-full">
+          {/* Collapse/Expand Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute top-4 right-4 z-10 bg-white border shadow-sm hover:bg-gray-50"
+            onClick={() => setIsTemplateCollapsed(!isTemplateCollapsed)}
+          >
+            {isTemplateCollapsed ? (
+              <ChevronRight size={16} />
+            ) : (
+              <ChevronLeft size={16} />
+            )}
+          </Button>
+
+          {/* Template Editor - only show when not collapsed */}
+          {!isTemplateCollapsed && (
+            <div className="p-4 h-full">
+              <TemplateEditor
+                initialTemplate={defaultTemplate as ERTemplate}
+                onTemplateUpdate={handleTemplateUpdate}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Right Section - React Flow Diagram */}
-      <div className="w-1/2 p-4">
+      <div className="p-4 flex-1 mt-14">
         <DiagramVisualization
           nodes={styledNodes}
           edges={styledEdges}

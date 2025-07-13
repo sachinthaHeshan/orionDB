@@ -1,18 +1,38 @@
-import { Node, Edge, MarkerType } from "@xyflow/react";
+import { Node, Edge, MarkerType, Position } from "@xyflow/react";
 import { ERTemplate } from "@/types/er-diagram";
 import { parseFieldDefinition } from "@/utils/field-parser";
 import { loadPositionsFromLocalStorage } from "@/utils/position-storage";
+import { calculateOptimalEdgePositions } from "@/utils/shortest-path-calculator";
+
+interface HandlePositionInfo {
+  fieldName: string;
+  sourcePosition?: Position;
+  targetPosition?: Position;
+  showSourceHandle?: boolean;
+  showTargetHandle?: boolean;
+}
+
+interface EdgeInfo {
+  source: string;
+  target: string;
+  sourceHandle: string;
+  targetHandle: string;
+  sourceField: string;
+  targetField: string;
+  type: "relation" | "foreignKey";
+  edgeData: Edge;
+}
 
 export const generateNodesAndEdges = (
   template: ERTemplate
 ): { nodes: Node[]; edges: Edge[] } => {
   const newNodes: Node[] = [];
-  const newEdges: Edge[] = [];
+  const edgeInfos: EdgeInfo[] = [];
 
   // Load saved positions
   const savedPositions = loadPositionsFromLocalStorage();
 
-  // Create nodes for each entity
+  // Create basic nodes first (without handle positions)
   const entityEntries = Object.entries(template.entities);
   entityEntries.forEach(([entityName, fields], index) => {
     const node: Node = {
@@ -27,9 +47,8 @@ export const generateNodesAndEdges = (
     newNodes.push(node);
   });
 
-  // Create edges for explicit relationships (field-to-field)
+  // Collect all edge information first
   template.relations.forEach((relationship, index) => {
-    // Parse the from and to fields (e.g., "user.id" -> entity: "user", field: "id")
     const [fromEntity, fromField] = relationship.from.split(".");
     const [toEntity, toField] = relationship.to.split(".");
 
@@ -43,7 +62,22 @@ export const generateNodesAndEdges = (
       type: "smoothstep",
       animated: true,
       style: { stroke: "#8b5cf6", strokeWidth: 2 },
-      labelStyle: { fill: "#8b5cf6", fontWeight: 700 },
+      labelStyle: {
+        fill: "#8b5cf6",
+        fontWeight: 700,
+        fontSize: 12,
+        fontFamily: "system-ui, sans-serif",
+      },
+      labelShowBg: true,
+      labelBgStyle: {
+        fill: "#ffffff",
+        stroke: "#8b5cf6",
+        strokeWidth: 1,
+        fillOpacity: 0.95,
+      },
+      labelBgPadding: [6, 8],
+      labelBgBorderRadius: 4,
+      interactionWidth: 20,
       markerEnd: {
         type: MarkerType.ArrowClosed,
         width: 20,
@@ -51,10 +85,20 @@ export const generateNodesAndEdges = (
         color: "#8b5cf6",
       },
     };
-    newEdges.push(edge);
+
+    edgeInfos.push({
+      source: fromEntity,
+      target: toEntity,
+      sourceHandle: `${fromEntity}-${fromField}-source`,
+      targetHandle: `${toEntity}-${toField}-target`,
+      sourceField: fromField,
+      targetField: toField,
+      type: "relation",
+      edgeData: edge,
+    });
   });
 
-  // Create edges for foreign key relationships (field-to-field)
+  // Create edges for foreign key relationships
   entityEntries.forEach(([entityName, fields]) => {
     Object.entries(fields).forEach(([fieldName, fieldDefinition]) => {
       const parsedField = parseFieldDefinition(
@@ -64,8 +108,6 @@ export const generateNodesAndEdges = (
         fieldName
       );
       if (parsedField.foreignKey) {
-        // Try to infer the referenced entity/field based on naming convention
-        // e.g., "user_id" -> references "user.id"
         let referencedEntity = "";
         const referencedField = "id";
 
@@ -73,7 +115,6 @@ export const generateNodesAndEdges = (
           referencedEntity = fieldName.replace("_id", "");
         }
 
-        // Check if the referenced entity exists
         if (template.entities[referencedEntity]) {
           const foreignKeyEdge: Edge = {
             id: `fk-${entityName}-${fieldName}-${referencedEntity}-${referencedField}`,
@@ -92,8 +133,19 @@ export const generateNodesAndEdges = (
             labelStyle: {
               fill: "#10b981",
               fontWeight: 600,
-              fontSize: 12,
+              fontSize: 11,
+              fontFamily: "system-ui, sans-serif",
             },
+            labelShowBg: true,
+            labelBgStyle: {
+              fill: "#ffffff",
+              stroke: "#10b981",
+              strokeWidth: 1,
+              fillOpacity: 0.95,
+            },
+            labelBgPadding: [4, 6],
+            labelBgBorderRadius: 3,
+            interactionWidth: 20,
             markerEnd: {
               type: MarkerType.ArrowClosed,
               width: 20,
@@ -101,11 +153,105 @@ export const generateNodesAndEdges = (
               color: "#10b981",
             },
           };
-          newEdges.push(foreignKeyEdge);
+
+          edgeInfos.push({
+            source: entityName,
+            target: referencedEntity,
+            sourceHandle: `${entityName}-${fieldName}-target`,
+            targetHandle: `${referencedEntity}-${referencedField}-source`,
+            sourceField: fieldName,
+            targetField: referencedField,
+            type: "foreignKey",
+            edgeData: foreignKeyEdge,
+          });
         }
       }
     });
   });
 
-  return { nodes: newNodes, edges: newEdges };
+  // Calculate optimal positions for all edges
+  const optimalEdgePositions = calculateOptimalEdgePositions(
+    newNodes,
+    edgeInfos
+  );
+
+  // Create handle position maps for each entity
+  const entityHandlePositions = new Map<string, HandlePositionInfo[]>();
+
+  // Combine edge info with optimal positions
+  edgeInfos.forEach((edgeInfo, index) => {
+    const optimalInfo = optimalEdgePositions[index];
+    if (!optimalInfo) return;
+
+    const { source, target, sourceField, targetField, type } = edgeInfo;
+    const { optimalSourcePosition, optimalTargetPosition } = optimalInfo;
+
+    // Initialize arrays if they don't exist
+    if (!entityHandlePositions.has(source)) {
+      entityHandlePositions.set(source, []);
+    }
+    if (!entityHandlePositions.has(target)) {
+      entityHandlePositions.set(target, []);
+    }
+
+    const sourceHandles = entityHandlePositions.get(source)!;
+    const targetHandles = entityHandlePositions.get(target)!;
+
+    // Find or create handle position info for source field
+    let sourceHandleInfo = sourceHandles.find(
+      (h) => h.fieldName === sourceField
+    );
+    if (!sourceHandleInfo) {
+      sourceHandleInfo = {
+        fieldName: sourceField,
+        sourcePosition: optimalSourcePosition,
+        targetPosition: Position.Left,
+        showSourceHandle: false,
+        showTargetHandle: false,
+      };
+      sourceHandles.push(sourceHandleInfo);
+    }
+
+    // Find or create handle position info for target field
+    let targetHandleInfo = targetHandles.find(
+      (h) => h.fieldName === targetField
+    );
+    if (!targetHandleInfo) {
+      targetHandleInfo = {
+        fieldName: targetField,
+        sourcePosition: Position.Right,
+        targetPosition: optimalTargetPosition,
+        showSourceHandle: false,
+        showTargetHandle: false,
+      };
+      targetHandles.push(targetHandleInfo);
+    }
+
+    // Update the handle information based on edge type
+    if (type === "relation") {
+      sourceHandleInfo.sourcePosition = optimalSourcePosition;
+      sourceHandleInfo.showSourceHandle = true;
+      targetHandleInfo.targetPosition = optimalTargetPosition;
+      targetHandleInfo.showTargetHandle = true;
+    } else if (type === "foreignKey") {
+      sourceHandleInfo.targetPosition = optimalSourcePosition;
+      sourceHandleInfo.showTargetHandle = true;
+      targetHandleInfo.sourcePosition = optimalTargetPosition;
+      targetHandleInfo.showSourceHandle = true;
+    }
+  });
+
+  // Update nodes with handle position information
+  const updatedNodes = newNodes.map((node) => ({
+    ...node,
+    data: {
+      ...node.data,
+      handlePositions: entityHandlePositions.get(node.id) || [],
+    },
+  }));
+
+  // Create the final edges array
+  const updatedEdges = edgeInfos.map((edgeInfo) => edgeInfo.edgeData);
+
+  return { nodes: updatedNodes, edges: updatedEdges };
 };

@@ -19,12 +19,27 @@ export const useERDiagram = (initialTemplate: ERTemplate) => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[]);
   const currentSelectionRef = useRef<string | null>(null);
 
-  // Enhanced onNodesChange handler to save positions
+  // Function to recalculate edge positions when nodes are moved
+  const recalculateEdgePositions = useCallback(() => {
+    // Regenerate nodes and edges with new positions
+    const { nodes: newNodes, edges: newEdges } =
+      generateNodesAndEdges(template);
+
+    // Apply current selection styling if any
+    const selectedNode = currentSelectionRef.current;
+    const styledNodes = updateNodeStyles(newNodes, newEdges, selectedNode);
+    const styledEdges = updateEdgeStyles(newEdges, selectedNode);
+
+    setNodes(styledNodes);
+    setEdges(styledEdges);
+  }, [template, setNodes, setEdges]);
+
+  // Enhanced onNodesChange handler to save positions and recalculate edges
   const handleNodesChange = useCallback(
     (changes: NodeChange[]) => {
       onNodesChange(changes);
 
-      // Save positions when nodes are moved
+      // Check if nodes were moved
       const hasPositionChange = changes.some(
         (change: NodeChange) =>
           change.type === "position" &&
@@ -33,16 +48,21 @@ export const useERDiagram = (initialTemplate: ERTemplate) => {
       );
 
       if (hasPositionChange) {
-        // Use setTimeout to ensure state is updated before saving
+        // Use setTimeout to ensure state is updated before processing
         setTimeout(() => {
           setNodes((currentNodes) => {
+            // Save positions to localStorage
             savePositionsToLocalStorage(currentNodes);
+
+            // Recalculate edge positions with new node positions
+            recalculateEdgePositions();
+
             return currentNodes;
           });
         }, 0);
       }
     },
-    [onNodesChange, setNodes]
+    [onNodesChange, setNodes, recalculateEdgePositions]
   );
 
   // Handle edge connections

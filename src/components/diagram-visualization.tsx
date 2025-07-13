@@ -43,11 +43,18 @@ export const DiagramVisualization: React.FC<DiagramVisualizationProps> = ({
     <Card className="h-full">
       <CardHeader>
         <CardTitle>ER Diagram Visualization</CardTitle>
-        {selectedNode && (
-          <div className="text-sm text-blue-600 font-medium">
-            Selected: {selectedNode} (Click background to deselect)
-          </div>
-        )}
+
+        <div className="text-sm text-blue-600 font-medium h-1">
+          {selectedNode && (
+            <>
+              SELECTED:{" "}
+              <span className="text-sm font-bold">{selectedNode} </span>
+              <span className="text-xs text-gray-500">
+                (Click background to deselect)
+              </span>{" "}
+            </>
+          )}
+        </div>
       </CardHeader>
       <CardContent className="h-full pb-4">
         <div className="h-full border rounded-md">
@@ -61,6 +68,7 @@ export const DiagramVisualization: React.FC<DiagramVisualizationProps> = ({
             onPaneClick={onPaneClick}
             nodeTypes={nodeTypes}
             fitView
+            proOptions={{ hideAttribution: true }}
           >
             <Background />
             <Controls />

@@ -1,4 +1,5 @@
 import React from "react";
+import { Position } from "@xyflow/react";
 import {
   DatabaseSchemaNode,
   DatabaseSchemaNodeHeader,
@@ -9,13 +10,34 @@ import {
 import { EntityFields, ERTemplate } from "@/types/er-diagram";
 import { parseFieldDefinition } from "@/utils/field-parser";
 
+interface HandlePositionInfo {
+  fieldName: string;
+  sourcePosition?: Position;
+  targetPosition?: Position;
+  showSourceHandle?: boolean;
+  showTargetHandle?: boolean;
+}
+
 interface ERNodeProps {
-  data: { name: string; fields: EntityFields; template?: ERTemplate };
+  data: {
+    name: string;
+    fields: EntityFields;
+    template?: ERTemplate;
+    handlePositions?: HandlePositionInfo[];
+  };
   selected?: boolean;
 }
 
 export const ERNode: React.FC<ERNodeProps> = ({ data, selected }) => {
   const fieldEntries = Object.entries(data.fields);
+
+  // Create a map of field names to their handle position information
+  const handlePositionMap = new Map<string, HandlePositionInfo>();
+  if (data.handlePositions) {
+    data.handlePositions.forEach((info) => {
+      handlePositionMap.set(info.fieldName, info);
+    });
+  }
 
   return (
     <DatabaseSchemaNode
@@ -34,6 +56,9 @@ export const ERNode: React.FC<ERNodeProps> = ({ data, selected }) => {
             data.name,
             fieldName
           );
+
+          const handleInfo = handlePositionMap.get(fieldName);
+
           return (
             <DatabaseSchemaTableRow
               key={index}
@@ -41,6 +66,10 @@ export const ERNode: React.FC<ERNodeProps> = ({ data, selected }) => {
               attributeName={fieldName}
               isPrimaryKey={parsedField.primaryKey}
               isForeignKey={parsedField.foreignKey}
+              sourcePosition={handleInfo?.sourcePosition}
+              targetPosition={handleInfo?.targetPosition}
+              showSourceHandle={handleInfo?.showSourceHandle}
+              showTargetHandle={handleInfo?.showTargetHandle}
             >
               <DatabaseSchemaTableCell className="font-medium">
                 {fieldName}
