@@ -44,12 +44,12 @@ export const DiagramVisualization: React.FC<DiagramVisualizationProps> = ({
       <CardHeader>
         <CardTitle>ER Diagram Visualization</CardTitle>
 
-        <div className="text-sm text-blue-600 font-medium h-1">
+        <div className="text-sm text-primary font-medium h-1">
           {selectedNode && (
             <>
               SELECTED:{" "}
               <span className="text-sm font-bold">{selectedNode} </span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-muted-foreground">
                 (Click background to deselect)
               </span>{" "}
             </>

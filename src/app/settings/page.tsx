@@ -101,7 +101,7 @@ export default function SettingsPage() {
         snapToGrid: true,
       };
       setSettings(defaultSettings);
-      setTheme("light");
+      setTheme("dark");
       localStorage.removeItem("appSettings");
     }
   };
@@ -135,19 +135,19 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="p-6 bg-white min-h-full">
+    <div className="p-6 bg-background min-h-full">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-            <p className="text-gray-600 mt-1">
+            <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+            <p className="text-muted-foreground mt-1">
               Customize your ER Designer experience
             </p>
           </div>
           <div className="flex items-center gap-2">
             {lastSaved && (
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-muted-foreground">
                 Last saved: {lastSaved.toLocaleTimeString()}
               </span>
             )}
@@ -180,7 +180,7 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   Theme
                 </label>
                 <select
@@ -188,7 +188,7 @@ export default function SettingsPage() {
                   onChange={(e) =>
                     setTheme(e.target.value as "light" | "dark" | "system")
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground"
                 >
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>
@@ -197,7 +197,7 @@ export default function SettingsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   Grid Size
                 </label>
                 <input
@@ -211,7 +211,7 @@ export default function SettingsPage() {
                   }
                   className="w-full"
                 />
-                <div className="flex justify-between text-sm text-gray-500 mt-1">
+                <div className="flex justify-between text-sm text-muted-foreground mt-1">
                   <span>10px</span>
                   <span>{settings.gridSize}px</span>
                   <span>50px</span>
@@ -220,10 +220,10 @@ export default function SettingsPage() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="font-medium text-gray-700">
+                  <label className="font-medium text-foreground">
                     Snap to Grid
                   </label>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-muted-foreground">
                     Automatically align elements to grid
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export default function SettingsPage() {
                     }
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-ring rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                 </label>
               </div>
             </CardContent>
@@ -255,7 +255,7 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   Default Template
                 </label>
                 <select
@@ -263,7 +263,7 @@ export default function SettingsPage() {
                   onChange={(e) =>
                     handleSettingChange("defaultTemplate", e.target.value)
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground"
                 >
                   <option value="basic">Basic</option>
                   <option value="ecommerce">E-commerce</option>
@@ -273,7 +273,7 @@ export default function SettingsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground mb-2">
                   Export Format
                 </label>
                 <select
@@ -281,7 +281,7 @@ export default function SettingsPage() {
                   onChange={(e) =>
                     handleSettingChange("exportFormat", e.target.value)
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground"
                 >
                   <option value="json">JSON</option>
                   <option value="sql">SQL</option>
@@ -291,8 +291,10 @@ export default function SettingsPage() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="font-medium text-gray-700">Auto Save</label>
-                  <p className="text-sm text-gray-500">
+                  <label className="font-medium text-foreground">
+                    Auto Save
+                  </label>
+                  <p className="text-sm text-muted-foreground">
                     Automatically save changes
                   </p>
                 </div>
@@ -305,7 +307,7 @@ export default function SettingsPage() {
                     }
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-ring rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                 </label>
               </div>
             </CardContent>
@@ -323,10 +325,10 @@ export default function SettingsPage() {
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="font-medium text-gray-700">
+                  <label className="font-medium text-foreground">
                     Enable Notifications
                   </label>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-muted-foreground">
                     Receive notifications for important updates
                   </p>
                 </div>
@@ -339,7 +341,7 @@ export default function SettingsPage() {
                     }
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-ring rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                 </label>
               </div>
             </CardContent>

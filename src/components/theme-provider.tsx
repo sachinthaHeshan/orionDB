@@ -25,18 +25,18 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>("light");
-  const [actualTheme, setActualTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<Theme>("dark");
+  const [actualTheme, setActualTheme] = useState<"light" | "dark">("dark");
 
   // Load theme from localStorage and system preference
   useEffect(() => {
     const savedTheme = localStorage.getItem("appSettings");
-    let initialTheme: Theme = "light";
+    let initialTheme: Theme = "dark";
 
     if (savedTheme) {
       try {
         const settings = JSON.parse(savedTheme);
-        initialTheme = settings.theme || "light";
+        initialTheme = settings.theme || "dark";
       } catch (error) {
         console.error("Failed to parse saved theme:", error);
       }

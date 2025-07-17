@@ -27,18 +27,28 @@ export default function Home() {
   const { selectedNode, onNodeClick, onPaneClick } = useNodeSelection();
   const prevTemplateRef = useRef<ERTemplate>({} as ERTemplate);
   const [isTemplateCollapsed, setIsTemplateCollapsed] = useState(false);
+  const [draftTemplate, setDraftTemplate] = useState<ERTemplate>(
+    defaultTemplate as ERTemplate
+  );
   const { currentProject, saveProject } = useProjects();
 
   // Load current project template when available
   useEffect(() => {
     if (currentProject && currentProject.template) {
       setTemplate(currentProject.template);
+      setDraftTemplate(currentProject.template);
     }
   }, [currentProject, setTemplate]);
 
-  // Handle template update from editor
+  // Handle draft template changes (when user types)
+  const handleDraftTemplateChange = (newTemplate: ERTemplate) => {
+    setDraftTemplate(newTemplate);
+  };
+
+  // Handle template update from editor (when user clicks "Update Diagram")
   const handleTemplateUpdate = (newTemplate: ERTemplate) => {
     setTemplate(newTemplate);
+    setDraftTemplate(newTemplate);
   };
 
   // Handle template changes
@@ -69,13 +79,13 @@ export default function Home() {
   const styledEdges = updateEdgeStyles(edges, selectedNode);
 
   return (
-    <div className="h-full flex bg-black">
+    <div className="h-full flex bg-background">
       {/* Top Navigation Bar */}
-      <div className="absolute top-0 left-0 right-0 bg-white border-b z-20 px-4 py-2">
+      <div className="absolute top-0 left-0 right-0 bg-card border-b border-border z-20 px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             {currentProject && (
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-muted-foreground">
                 {currentProject.name}
               </span>
             )}
@@ -105,7 +115,7 @@ export default function Home() {
           <Button
             variant="ghost"
             size="sm"
-            className="absolute top-4 right-4 z-10 bg-white border shadow-sm hover:bg-gray-50"
+            className="absolute top-5 right-5 z-10 bg-card border border-border shadow-sm hover:bg-accent rounded-[10px]"
             onClick={() => setIsTemplateCollapsed(!isTemplateCollapsed)}
           >
             {isTemplateCollapsed ? (
@@ -119,7 +129,8 @@ export default function Home() {
           {!isTemplateCollapsed && (
             <div className="p-4 h-full">
               <TemplateEditor
-                initialTemplate={defaultTemplate as ERTemplate}
+                initialTemplate={draftTemplate}
+                onDraftChange={handleDraftTemplateChange}
                 onTemplateUpdate={handleTemplateUpdate}
               />
             </div>
