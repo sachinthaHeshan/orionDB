@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ER Designer",
+  title: "OrionDB",
   description: "Entity Relationship Diagram Designer",
 };
 

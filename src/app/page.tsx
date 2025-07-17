@@ -85,9 +85,7 @@ export default function Home() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             {currentProject && (
-              <span className="text-sm text-muted-foreground">
-                {currentProject.name}
-              </span>
+              <span className="text-sm text-muted-foreground">OrionDB</span>
             )}
           </div>
           <div className="flex items-center gap-2">

@@ -59,7 +59,7 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
             <span className="text-white font-bold text-sm">ER</span>
           </div>
           {!collapsed && (
-            <span className="font-semibold text-foreground">ER Designer</span>
+            <span className="font-semibold text-foreground">OrionDB</span>
           )}
         </div>
 

@@ -147,7 +147,7 @@ export default function SettingsPage() {
               </span>
             </h1>
             <p className="text-muted-foreground mt-1">
-              Customize your ER Designer experience
+              Customize your OrionDB experience
             </p>
           </div>
           <div className="flex items-center gap-2">
