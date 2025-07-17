@@ -140,7 +140,12 @@ export default function SettingsPage() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+            <h1 className="text-3xl font-bold text-foreground">
+              Settings
+              <span className="ml-2 px-2 py-1 text-xs bg-yellow-200 text-yellow-800 rounded-full">
+                Coming Soon
+              </span>
+            </h1>
             <p className="text-muted-foreground mt-1">
               Customize your ER Designer experience
             </p>

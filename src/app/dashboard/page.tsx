@@ -61,6 +61,9 @@ export default function Dashboard() {
           <div>
             <h1 className="text-3xl font-bold text-foreground">
               Project Dashboard
+              <span className="ml-2 px-2 py-1 text-xs bg-yellow-200 text-yellow-800 rounded-full">
+                Coming Soon
+              </span>
             </h1>
             <p className="text-muted-foreground mt-1">
               Manage your ER diagram projects
