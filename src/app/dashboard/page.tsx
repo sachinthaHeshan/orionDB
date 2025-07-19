@@ -308,14 +308,14 @@ function CreateProjectModal({
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-4 h-4 rounded-full border-2 ${
+                    className={`relative w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
                       selectedType === "manual"
-                        ? "border-ring bg-ring"
-                        : "border-border"
+                        ? "border-blue-500 bg-blue-500"
+                        : "border-gray-300 bg-transparent"
                     }`}
                   >
                     {selectedType === "manual" && (
-                      <div className="w-full h-full rounded-full bg-background scale-50"></div>
+                      <div className="w-2 h-2 rounded-full bg-white"></div>
                     )}
                   </div>
                   <div>
@@ -341,14 +341,14 @@ function CreateProjectModal({
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-4 h-4 rounded-full border-2 ${
+                    className={`relative w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
                       selectedType === "import"
-                        ? "border-ring bg-ring"
-                        : "border-border"
+                        ? "border-blue-500 bg-blue-500"
+                        : "border-gray-300 bg-transparent"
                     }`}
                   >
                     {selectedType === "import" && (
-                      <div className="w-full h-full rounded-full bg-background scale-50"></div>
+                      <div className="w-2 h-2 rounded-full bg-white"></div>
                     )}
                   </div>
                   <div>
