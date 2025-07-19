@@ -1,0 +1,1 @@
+ALTER TABLE "project" ADD COLUMN "positions" json DEFAULT '{}'::json;

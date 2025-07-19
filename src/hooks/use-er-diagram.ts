@@ -11,30 +11,19 @@ import {
 import { ERTemplate } from "@/types/er-diagram";
 import { generateNodesAndEdges } from "@/utils/node-edge-generator";
 import { updateNodeStyles, updateEdgeStyles } from "@/utils/node-edge-styling";
-import { savePositionsToLocalStorage } from "@/utils/position-storage";
+import { savePositionsToDatabase } from "@/utils/position-storage";
 
-export const useERDiagram = (initialTemplate: ERTemplate) => {
+export const useERDiagram = (
+  initialTemplate: ERTemplate,
+  projectId?: string,
+  currentPositions: Record<string, { x: number; y: number }> = {}
+) => {
   const [template, setTemplate] = useState<ERTemplate>(initialTemplate);
   const [nodes, setNodes, onNodesChange] = useNodesState([] as Node[]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[]);
   const currentSelectionRef = useRef<string | null>(null);
 
-  // Function to recalculate edge positions when nodes are moved
-  const recalculateEdgePositions = useCallback(() => {
-    // Regenerate nodes and edges with new positions
-    const { nodes: newNodes, edges: newEdges } =
-      generateNodesAndEdges(template);
-
-    // Apply current selection styling if any
-    const selectedNode = currentSelectionRef.current;
-    const styledNodes = updateNodeStyles(newNodes, newEdges, selectedNode);
-    const styledEdges = updateEdgeStyles(newEdges, selectedNode);
-
-    setNodes(styledNodes);
-    setEdges(styledEdges);
-  }, [template, setNodes, setEdges]);
-
-  // Enhanced onNodesChange handler to save positions and recalculate edges
+  // Enhanced onNodesChange handler to save positions
   const handleNodesChange = useCallback(
     (changes: NodeChange[]) => {
       onNodesChange(changes);
@@ -47,22 +36,22 @@ export const useERDiagram = (initialTemplate: ERTemplate) => {
           change.dragging === false
       );
 
-      if (hasPositionChange) {
+      if (hasPositionChange && projectId) {
         // Use setTimeout to ensure state is updated before processing
         setTimeout(() => {
           setNodes((currentNodes) => {
-            // Save positions to localStorage
-            savePositionsToLocalStorage(currentNodes);
+            // Save positions to database
+            savePositionsToDatabase(projectId, currentNodes).catch((error) => {
+              console.error("Failed to save positions to database:", error);
+            });
 
-            // Recalculate edge positions with new node positions
-            recalculateEdgePositions();
-
+            // Don't recalculate edge positions - let the user's position changes persist
             return currentNodes;
           });
         }, 0);
       }
     },
-    [onNodesChange, setNodes, recalculateEdgePositions]
+    [onNodesChange, setNodes, projectId]
   );
 
   // Handle edge connections
@@ -73,8 +62,10 @@ export const useERDiagram = (initialTemplate: ERTemplate) => {
 
   // Generate nodes and edges from template
   const regenerateNodesAndEdges = useCallback(() => {
-    const { nodes: newNodes, edges: newEdges } =
-      generateNodesAndEdges(template);
+    const { nodes: newNodes, edges: newEdges } = generateNodesAndEdges(
+      template,
+      currentPositions
+    );
 
     // Apply current selection styling if any
     const selectedNode = currentSelectionRef.current;
@@ -83,31 +74,7 @@ export const useERDiagram = (initialTemplate: ERTemplate) => {
 
     setNodes(styledNodes);
     setEdges(styledEdges);
-  }, [template, setNodes, setEdges]);
-
-  // Update styles when selection changes
-  const updateStyles = useCallback(
-    (selectedNode: string | null) => {
-      currentSelectionRef.current = selectedNode;
-
-      // Get current state values
-      const currentNodes = nodes;
-      const currentEdges = edges;
-
-      // Calculate styled versions
-      const styledNodes = updateNodeStyles(
-        currentNodes,
-        currentEdges,
-        selectedNode
-      );
-      const styledEdges = updateEdgeStyles(currentEdges, selectedNode);
-
-      // Update both states
-      setNodes(styledNodes);
-      setEdges(styledEdges);
-    },
-    [setNodes, setEdges, nodes, edges]
-  );
+  }, [template, setNodes, setEdges, currentPositions]);
 
   return {
     template,
@@ -118,6 +85,5 @@ export const useERDiagram = (initialTemplate: ERTemplate) => {
     onEdgesChange,
     onConnect,
     regenerateNodesAndEdges,
-    updateStyles,
   };
 };

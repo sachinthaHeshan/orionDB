@@ -1,7 +1,6 @@
 import { Node, Edge, MarkerType, Position } from "@xyflow/react";
 import { ERTemplate } from "@/types/er-diagram";
 import { parseFieldDefinition } from "@/utils/field-parser";
-import { loadPositionsFromLocalStorage } from "@/utils/position-storage";
 import { calculateOptimalEdgePositions } from "@/utils/shortest-path-calculator";
 
 interface HandlePositionInfo {
@@ -24,13 +23,11 @@ interface EdgeInfo {
 }
 
 export const generateNodesAndEdges = (
-  template: ERTemplate
+  template: ERTemplate,
+  savedPositions: Record<string, { x: number; y: number }> = {}
 ): { nodes: Node[]; edges: Edge[] } => {
   const newNodes: Node[] = [];
   const edgeInfos: EdgeInfo[] = [];
-
-  // Load saved positions
-  const savedPositions = loadPositionsFromLocalStorage();
 
   // Create basic nodes first (without handle positions)
   const entityEntries = Object.entries(template.entities);
@@ -251,7 +248,7 @@ export const generateNodesAndEdges = (
   }));
 
   // Create the final edges array
-  const updatedEdges = edgeInfos.map((edgeInfo) => edgeInfo.edgeData);
+  const updatedEdges = edgeInfos.map((info) => info.edgeData);
 
   return { nodes: updatedNodes, edges: updatedEdges };
 };

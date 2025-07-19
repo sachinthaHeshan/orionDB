@@ -227,67 +227,149 @@ function CreateProjectModal({
   onClose: () => void;
   onSubmit: (data: CreateProjectData) => void;
 }) {
-  const [formData, setFormData] = useState<CreateProjectData>({
+  const [formData, setFormData] = useState({
     name: "",
     description: "",
   });
+  const [selectedType, setSelectedType] = useState<"manual" | "import" | null>(
+    null
+  );
+
+  const handleTypeSelect = (type: "manual" | "import") => {
+    setSelectedType(type);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name.trim()) {
-      onSubmit(formData);
+    if (formData.name.trim() && selectedType) {
+      onSubmit({
+        ...formData,
+        type: selectedType,
+      });
       setFormData({ name: "", description: "" });
+      setSelectedType(null);
     }
   };
 
+  const canSubmit = formData.name.trim() && selectedType;
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border border-border rounded-lg max-w-md w-full p-6">
-        <h2 className="text-xl font-bold text-foreground mb-4">
+      <div className="bg-card border border-border rounded-lg max-w-lg w-full p-6">
+        <h2 className="text-xl font-bold text-foreground mb-6">
           Create New Project
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1">
+            <label className="block text-sm font-medium text-foreground mb-2">
               Project Name
             </label>
             <input
               type="text"
+              required
+              className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground"
               placeholder="Enter project name"
-              required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1">
+            <label className="block text-sm font-medium text-foreground mb-2">
               Description
             </label>
             <textarea
+              rows={3}
+              className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground resize-none"
               value={formData.description}
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground h-24 resize-none"
-              placeholder="Enter project description"
+              placeholder="Enter project description (optional)"
             />
           </div>
 
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              className="flex-1"
-            >
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-3">
+              Project Type
+            </label>
+            <div className="grid grid-cols-1 gap-3">
+              <button
+                type="button"
+                onClick={() => handleTypeSelect("manual")}
+                className={`p-4 border-2 rounded-lg text-left transition-all hover:border-ring ${
+                  selectedType === "manual"
+                    ? "border-ring bg-accent/50"
+                    : "border-border hover:bg-accent/20"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-4 h-4 rounded-full border-2 ${
+                      selectedType === "manual"
+                        ? "border-ring bg-ring"
+                        : "border-border"
+                    }`}
+                  >
+                    {selectedType === "manual" && (
+                      <div className="w-full h-full rounded-full bg-background scale-50"></div>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">
+                      Create Manually
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Start with an empty project and build tables and relations
+                      manually
+                    </p>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleTypeSelect("import")}
+                className={`p-4 border-2 rounded-lg text-left transition-all hover:border-ring ${
+                  selectedType === "import"
+                    ? "border-ring bg-accent/50"
+                    : "border-border hover:bg-accent/20"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-4 h-4 rounded-full border-2 ${
+                      selectedType === "import"
+                        ? "border-ring bg-ring"
+                        : "border-border"
+                    }`}
+                  >
+                    {selectedType === "import" && (
+                      <div className="w-full h-full rounded-full bg-background scale-50"></div>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">
+                      Import from Database
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Connect to existing database (PostgreSQL, MySQL, Neon,
+                      Hasura) and auto-generate ER diagram
+                    </p>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4">
+            <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" className="flex-1">
+            <Button type="submit" disabled={!canSubmit}>
               Create Project
             </Button>
           </div>

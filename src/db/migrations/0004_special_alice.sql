@@ -1,0 +1,1 @@
+ALTER TABLE "project" ADD COLUMN "type" varchar(20) DEFAULT 'manual' NOT NULL;
